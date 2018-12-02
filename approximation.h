@@ -3,32 +3,33 @@
 #define c3 3
 #define c4 2
 #define c5 1
-float midpoint_10000(float a, float b);
-float trapezoidal_10000(float a, float b);
-float simpson_10000(float a, float b);
+#define N 10000
+float midpoint_N(float a, float b);
+float trapezoidal_N(float a, float b);
+float simpson_N(float a, float b);
 float f(float x);
 
-float midpoint_10000(float a, float b)
+float midpoint_N(float a, float b)
 {
-    float sum = 0.0L, i, de_x = (float)(b - a) / 10000;
+    float sum = 0, i, de_x = (b - a) / N;
     for (i = a; i < b; i += de_x)
         sum += f(i + de_x);
     sum *= de_x;
     return sum;
 }
-float trapezoidal_10000(float a, float b)
+float trapezoidal_N(float a, float b)
 {
-    float sum = 0.0L, i, de_x = (float)(b - a) / 10000;
+    float sum = 0, i, de_x = (b - a) / N;
     sum += f(a) + f(b);
     for (i = a + de_x; i < b; i += de_x)
         sum += 2 * f(i);
     sum *= de_x / 2;
     return sum;
 }
-float simpson_10000(float a, float b)
+float simpson_N(float a, float b)
 {
     int time = 0;
-    float sum = 0.0L, i, de_x = (float)(b - a) / 10000;
+    float sum = 0, i, de_x = (b - a) / N;
     sum += f(a) + f(b);
     time++;
     for (i = a + de_x; i < b; i += de_x, time++)
